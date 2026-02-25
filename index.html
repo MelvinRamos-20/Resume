@@ -1,181 +1,619 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - Melvin Ramos</title>
+    <title>Melvin Ramos — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #dfdfdf;
         }
 
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em 0;
+        :root {
+            --bg: #0f1117;
+            --surface: #161b27;
+            --surface2: #1d2535;
+            --border: #252d3f;
+            --ink: #e8eaf0;
+            --ink-soft: #7b85a0;
+            --ink-dim: #3d4a63;
+            --accent: #4f8ef7;
+            --accent-glow: rgba(79, 142, 247, 0.12);
+            --accent2: #38d9a9;
+            --mono: 'JetBrains Mono', monospace;
         }
 
-        section {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        html {
+            scroll-behavior: smooth;
         }
 
-        h1 {
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.7;
+            font-weight: 300;
+            min-height: 100vh;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero {
+            padding: 70px 6% 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 40px;
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--mono);
+            font-size: 11.5px;
+            letter-spacing: 0.18em;
+            color: var(--accent);
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
             color: #fff;
         }
 
-        h2 {
-            color: #333;
+        .hero h1 span {
+            color: var(--accent);
         }
 
-        .info {
+        .hero-sub {
+            margin-top: 16px;
+            font-size: 15px;
+            color: var(--ink-soft);
+            font-weight: 300;
+            max-width: 480px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
+            align-items: center;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
         }
 
-        .info div {
-            flex: 1;
-            padding: 10px;
-            margin: 0 5px;
-            background-color: #f0f0f0;
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 24px;
             border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            transition: opacity 0.2s, transform 0.2s;
         }
 
-        .profile-pic {
+        .btn-primary:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+        .contact-pills {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: var(--mono);
+            font-size: 11.5px;
+            color: var(--ink-soft);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 7px 14px;
+            border-radius: 4px;
+        }
+
+        .pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent2);
+            flex-shrink: 0;
+        }
+
+        .avatar {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            margin-right: 20px;
+            border: 2px solid var(--border);
+            box-shadow: 0 0 0 6px var(--accent-glow);
         }
 
-        /* Estilos para videos */
-        .video-container {
+        .skills-bar {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            padding: 18px 6%;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .skills-label {
+            font-family: var(--mono);
+            font-size: 10.5px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ink-dim);
+            margin-right: 6px;
+        }
+
+        .skill-chip {
+            font-family: var(--mono);
+            font-size: 11.5px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            color: var(--ink-soft);
+            transition: border-color 0.2s, color 0.2s;
+            cursor: default;
+        }
+
+        .skill-chip:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .skill-chip.highlight {
+            background: rgba(56, 217, 169, 0.08);
+            border-color: rgba(56, 217, 169, 0.3);
+            color: var(--accent2);
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 6% 100px;
+        }
+
+        .sec-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+
+        .sec-num {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+        }
+
+        .sec-title {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            color: var(--ink);
+        }
+
+        .sec-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .about-card {
+            background: linear-gradient(135deg, var(--surface2) 0%, #1a2440 100%);
+            border: 1px solid rgba(56, 217, 169, 0.2);
+            border-radius: 10px;
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .about-desc {
+            font-size: 14.5px;
+            color: var(--ink-soft);
+            line-height: 1.8;
+            max-width: 680px;
+        }
+
+        .about-desc strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .skill-group-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ink-dim);
+            margin-bottom: 10px;
+        }
+
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 34px;
+            margin-bottom: 20px;
+            transition: border-color 0.25s, box-shadow 0.25s;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .project-card:hover {
+            border-color: rgba(79, 142, 247, 0.35);
+            box-shadow: 0 0 30px rgba(79, 142, 247, 0.06);
+        }
+
+        .project-card:nth-child(2) {
+            animation-delay: 0.08s;
+        }
+
+        .project-card:nth-child(3) {
+            animation-delay: 0.16s;
+        }
+
+        .project-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .project-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .project-name a {
+            color: var(--ink);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .project-name a:hover {
+            color: var(--accent);
+        }
+
+        .gh-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ink-soft);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            padding: 5px 12px;
+            border-radius: 4px;
+            transition: border-color 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+
+        .gh-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 18px;
+        }
+
+        .tag {
+            font-family: var(--mono);
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            border: 1px solid rgba(79, 142, 247, 0.2);
+        }
+
+        .project-desc {
+            list-style: none;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+        }
+
+        .project-desc li {
+            font-size: 13.5px;
+            color: var(--ink-soft);
+            padding: 5px 0 5px 20px;
             position: relative;
-            overflow: hidden;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            border-radius: 8px;
-            background-color: #000; /* Fondo negro mientras carga */
+            line-height: 1.7;
         }
 
-        .video-container iframe {
+        .project-desc li::before {
+            content: '›';
             position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
+            left: 4px;
+            color: var(--accent);
+            font-size: 15px;
+            line-height: 1.55;
         }
 
-        /* Cuadrícula para múltiples videos */
+        .video-section {
+            margin-top: 24px;
+        }
+
+        .video-label {
+            font-family: var(--mono);
+            font-size: 10.5px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ink-dim);
+            margin-bottom: 12px;
+        }
+
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 10px;
         }
 
-        @media screen and (max-width: 600px) {
-            .info {
+        .video-wrap {
+            position: relative;
+            padding-top: 56.25%;
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--bg);
+            border: 1px solid var(--border);
+        }
+
+        .video-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px 6%;
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ink-dim);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 620px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .avatar {
+                display: none;
+            }
+
+            .project-top {
                 flex-direction: column;
             }
 
-            .profile-pic {
-                margin-right: 0;
-                margin-bottom: 10px;
+            .project-card {
+                padding: 22px;
+            }
+
+            .about-card {
+                padding: 22px;
             }
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1>CV - Melvin Ramos</h1>
-    </header>
 
-    <section>
-        <div style="text-align: center;">
-            <img class="profile-pic" src="astroboy.jpg" alt="Profile Picture">
-            <br><br>
-            <a href="cv.pdf" download target="_blank">Download Full CV (PDF)</a>
-        </div>
-    </section>
-
-    <section>
-        <h2>Personal Information</h2>
-        <div class="info">
-            <div>
-                <h3>Name</h3>
-                <p>Melvin Ramos</p>
-            </div>
-            <div>
-                <h3>Email</h3>
-                <p>estebaramosalvarez1237@gmail.com</p>
-            </div>
-            <div>
-                <h3>Phone</h3>
-                <p>(+502) 5544-6214</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>Projects</h2>
-        
+    <div class="hero">
         <div>
-            <h3><a href="https://github.com/MelRose11-R/voucher-order-automation">Voucher Order Automation</a></h3>
-            <p>UiPath, REFramework, SQL, Document Understanding</p>
-            <ul>
-                <li>Designed and implemented an end-to-end RPA solution to process voucher orders received by email.</li>
-                <li>Automated email ingestion, attachment handling, and validation of incoming sales orders.</li>
-                <li>Extracted structured order data from PDF documents using OCR and UiPath Document Understanding.</li>
-                <li>Implemented conditional workflows to validate voucher types and handle alternative business paths.</li>
-                <li>Integrated SQL Server queries to check availability, reserve vouchers, and update assignment status.</li>
-                <li>Generated dynamic voucher documents (Word to PDF) and sent automated confirmation emails to clients.</li>
-            </ul>
-            
-            <div style="margin-top: 20px;">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/DIGBhq4nsaA" title="Voucher Automation Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p class="hero-eyebrow">// portfolio</p>
+            <h1>Melvin <span>Ramos</span></h1>
+            <p class="hero-sub">RPA Developer &amp; Automation Engineer. I build solutions that eliminate repetitive
+                work and turn raw data into real results.</p>
+            <div class="hero-actions">
+                <a href="cv.pdf" download class="btn-primary">↓ Download CV</a>
+                <div class="contact-pills">
+                    <span class="contact-pill"><span class="pill-dot"></span>estebaramosalvarez1237@gmail.com</span>
+                    <span class="contact-pill"><span class="pill-dot"></span>(+502) 5544-6214</span>
                 </div>
             </div>
         </div>
-        
-        <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+        <img src="astroboy.jpg" alt="Melvin Ramos" class="avatar">
+    </div>
 
-        <div>
-            <h3><a href="https://github.com/MelRose11-R/data-processing-automation">Data Processing and Reporting Automation</a></h3>
-            <p>UiPath, Excel</p>
-            <ul>
-                <li>Developed functional automations to process, consolidate, and transform structured data from Excel files.</li>
-                <li>Implemented DataTable-based logic to calculate metrics, costs, and aggregated statistics efficiently.</li>
+    <div class="skills-bar">
+        <span class="skills-label">Stack</span>
+        <span class="skill-chip">C# · .NET</span>
+        <span class="skill-chip">UiPath</span>
+        <span class="skill-chip">SQL Server</span>
+        <span class="skill-chip">Excel</span>
+        <span class="skill-chip">Git</span>
+    </div>
+
+    <main class="wrapper">
+
+        <div class="sec-head" style="margin-top: 8px;">
+            <span class="sec-num">00</span>
+            <span class="sec-title">About</span>
+            <span class="sec-line"></span>
+        </div>
+
+        <div class="about-card">
+            <p class="about-desc">
+                I'm an <strong>RPA Developer &amp; Automation Engineer</strong> focused on building end-to-end solutions
+                that eliminate repetitive work. I design workflows that connect systems, process documents, and deliver
+                results — reliably and at scale.
+            </p>
+
+            <div>
+                <p class="skill-group-label">Languages</p>
+                <div class="chip-row">
+                    <span class="skill-chip">C#</span>
+                    <span class="skill-chip">.NET</span>
+                    <span class="skill-chip">SQL</span>
+                    <span class="skill-chip">VB.NET</span>
+                </div>
+            </div>
+
+            <div>
+                <p class="skill-group-label">Tools &amp; Platforms</p>
+                <div class="chip-row">
+                    <span class="skill-chip">UiPath Studio</span>
+                    <span class="skill-chip">REFramework</span>
+                    <span class="skill-chip">Document Understanding</span>
+                    <span class="skill-chip">OCR</span>
+                    <span class="skill-chip">SQL Server</span>
+                    <span class="skill-chip">Excel / Office</span>
+                    <span class="skill-chip">Git</span>
+                </div>
+            </div>
+
+            <div>
+                <p class="skill-group-label">What I do</p>
+                <div class="chip-row">
+                    <span class="skill-chip">Process Automation</span>
+                    <span class="skill-chip">Email Ingestion</span>
+                    <span class="skill-chip">PDF Data Extraction</span>
+                    <span class="skill-chip">Report Generation</span>
+                    <span class="skill-chip">System Integration</span>
+                    <span class="skill-chip">Backend Logic</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="sec-head" style="margin-top: 52px;">
+            <span class="sec-num">01</span>
+            <span class="sec-title">Projects</span>
+            <span class="sec-line"></span>
+        </div>
+
+        <div class="project-card">
+            <div class="project-top">
+                <p class="project-name">
+                    <a href="https://github.com/MelRose11-R/voucher-order-automation">Voucher Order Automation</a>
+                </p>
+                <a href="https://github.com/MelRose11-R/voucher-order-automation" target="_blank" class="gh-link">↗
+                    GitHub</a>
+            </div>
+            <div class="tag-row">
+                <span class="tag">UiPath</span>
+                <span class="tag">REFramework</span>
+                <span class="tag">SQL</span>
+                <span class="tag">Document Understanding</span>
+                <span class="tag">OCR</span>
+            </div>
+            <ul class="project-desc">
+                <li>Designed and implemented an end-to-end RPA solution to process voucher orders received by email.
+                </li>
+                <li>Automated email ingestion, attachment handling, and validation of incoming sales orders.</li>
+                <li>Extracted structured order data from PDF documents using OCR and UiPath Document Understanding.</li>
+                <li>Implemented conditional workflows to validate voucher types and handle alternative business paths.
+                </li>
+                <li>Integrated SQL Server queries to check availability, reserve vouchers, and update assignment status.
+                </li>
+                <li>Generated dynamic voucher documents (Word to PDF) and sent automated confirmation emails to clients.
+                </li>
+            </ul>
+            <div class="video-section">
+                <p class="video-label">// demo</p>
+                <div class="video-wrap">
+                    <iframe src="https://www.youtube.com/embed/DIGBhq4nsaA" title="Voucher Demo"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-top">
+                <p class="project-name">
+                    <a href="https://github.com/MelRose11-R/data-processing-automation">Data Processing &amp; Reporting
+                        Automation</a>
+                </p>
+                <a href="https://github.com/MelRose11-R/data-processing-automation" target="_blank" class="gh-link">↗
+                    GitHub</a>
+            </div>
+            <div class="tag-row">
+                <span class="tag">UiPath</span>
+                <span class="tag">Excel</span>
+                <span class="tag">DataTables</span>
+            </div>
+            <ul class="project-desc">
+                <li>Developed automations to process, consolidate, and transform structured data from Excel files.</li>
+                <li>Implemented DataTable-based logic to calculate metrics, costs, and aggregated statistics
+                    efficiently.</li>
                 <li>Automated data consolidation across multiple sources into unified reporting outputs.</li>
                 <li>Applied reusable logic patterns for loops, validations, and file system operations.</li>
             </ul>
-
-            <div class="video-grid">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/81-wj12C1WI?si=467qgF2uhvPRTYKE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/KjQV0NfoBq4?si=8Ay3Vdxg51zpFhJG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/16CoWNaepQk?si=QnwWtlKIK-Zf7Fon" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="video-section">
+                <p class="video-label">// demos</p>
+                <div class="video-grid">
+                    <div class="video-wrap">
+                        <iframe src="https://www.youtube.com/embed/81-wj12C1WI" title="Demo 1"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrap">
+                        <iframe src="https://www.youtube.com/embed/KjQV0NfoBq4" title="Demo 2"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrap">
+                        <iframe src="https://www.youtube.com/embed/16CoWNaepQk" title="Demo 3"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-</body>
-</html>
